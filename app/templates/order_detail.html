@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+<div class="detail-card">
+
+    <div class="detail-header">
+
+        <h2>
+            Order #{{ order.id }}
+        </h2>
+
+        <p>
+            {{ order.created_at|date:"d M Y, h:i A" }}
+        </p>
+
+    </div>
+
+
+    <div class="detail-body">
+
+        <h4>
+             Ordered Items
+        </h4>
+
+        {% for item in items %}
+
+        <div class="item-card">
+
+            <div>
+
+                <h5>
+                    {{ item.food.name }}
+                </h5>
+
+
+                <p>
+                    Quantity : {{ item.quantity }}
+                </p>
+
+
+            </div>
+
+            <h5 class="price">
+
+                ₹{{ item.price }}
+
+            </h5>
+
+        </div>
+
+        {% empty %}
+
+        <div class="alert alert-warning">
+
+            No items found for this order.
+
+        </div>
+
+        {% endfor %}
+
+        <div class="total-box">
+
+
+            Total Amount :
+
+            ₹{{ order.total_amount }}
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<style>
+
+
+body{
+
+background:#f5f7fb;
+
+}
+
+
+.detail-card{
+
+background:white;
+
+border-radius:25px;
+
+overflow:hidden;
+
+box-shadow:
+0 15px 40px rgba(0,0,0,.1);
+
+}
+
+
+
+.detail-header{
+
+background:
+linear-gradient(135deg,#667eea,#764ba2);
+
+color:white;
+
+padding:30px;
+
+}
+
+
+
+.detail-header h2{
+
+font-weight:800;
+
+}
+
+
+
+.detail-body{
+
+padding:35px;
+
+}
+
+
+
+.detail-body h4{
+
+color:#dc3545;
+
+font-weight:700;
+
+margin-bottom:25px;
+
+}
+
+
+
+.item-card{
+
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:#f8f9fa;
+
+padding:20px;
+
+border-radius:18px;
+
+margin-bottom:15px;
+
+transition:.3s;
+
+
+}
+
+
+
+.item-card:hover{
+
+transform:translateX(8px);
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.1);
+
+}
+
+
+
+.item-card h5{
+
+font-weight:700;
+
+}
+
+
+
+.item-card p{
+
+color:#777;
+
+margin:0;
+
+}
+
+
+
+.price{
+
+color:#198754;
+
+}
+
+
+
+.total-box{
+
+
+margin-top:30px;
+
+padding:25px;
+
+background:
+linear-gradient(135deg,#4facfe,#00f2fe);
+
+color:white;
+
+font-size:28px;
+
+font-weight:800;
+
+border-radius:20px;
+
+text-align:center;
+
+
+}
+
+
+
+</style>
+
+
+{% endblock %}

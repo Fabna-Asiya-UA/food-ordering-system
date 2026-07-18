@@ -1,0 +1,677 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+/* Page Background */
+
+body{
+    background:#f5f7fb;
+}
+
+
+/* Heading */
+
+.page-title{
+
+    font-size:45px;
+    font-weight:800;
+
+    background:linear-gradient(
+        90deg,
+        #ff512f,
+        #dd2476
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+}
+
+
+.subtitle{
+
+    color:#6c757d;
+    font-size:18px;
+
+}
+
+
+
+/* Order Card */
+
+.order-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    border:none;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.08);
+
+    transition:.4s;
+
+}
+
+
+
+.order-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:
+    0 25px 50px rgba(0,0,0,.15);
+
+}
+
+
+
+/* Order Header */
+
+
+.order-header{
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff512f,
+        #dd2476
+    );
+
+    color:white;
+
+    padding:22px;
+
+}
+
+
+
+.order-header h5{
+
+    font-weight:700;
+
+    margin:0;
+
+}
+
+
+
+.status{
+
+    background:white;
+
+    color:#198754;
+
+    padding:7px 18px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+
+
+/* Card Body */
+
+.order-body{
+
+    padding:25px;
+
+}
+
+
+
+/* Food Section */
+
+.food-section{
+
+    background:#fff7f4;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.section-title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#dc3545;
+
+    margin-bottom:15px;
+
+}
+
+
+
+/* Food Item */
+
+
+.food-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:12px;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.06);
+
+    transition:.3s;
+
+}
+
+
+
+.food-item:hover{
+
+    transform:translateX(8px);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.12);
+
+}
+
+
+
+.food-name{
+
+    font-size:17px;
+
+    font-weight:700;
+
+    color:#343a40;
+
+}
+
+
+
+.food-quantity{
+
+    color:#6c757d;
+
+    font-size:14px;
+
+    margin-top:5px;
+
+}
+
+
+
+.food-price{
+
+    background:
+    linear-gradient(
+        135deg,
+        #198754,
+        #20c997
+    );
+
+    color:white;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+}
+
+
+
+/* Amount Box */
+
+
+.amount-box{
+
+    background:
+    linear-gradient(
+        135deg,
+        #4facfe,
+        #00f2fe
+    );
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.amount-box small{
+
+    font-size:15px;
+
+}
+
+
+
+.amount{
+
+    font-size:32px;
+
+    font-weight:800;
+
+}
+
+
+
+/* Date Box */
+
+
+.date-box{
+
+    background:#f8f9fa;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.date-box p{
+
+    margin:5px 0;
+
+}
+
+
+
+/* Button */
+
+
+.view-btn{
+
+    width:100%;
+
+    padding:12px;
+
+    border-radius:30px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+
+
+.view-btn:hover{
+
+    transform:scale(1.04);
+
+}
+
+
+
+/* Empty Order */
+
+.empty-box{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:60px;
+
+    text-align:center;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.08);
+
+}
+
+
+.empty-box img{
+
+    width:130px;
+
+}
+
+
+.empty-box h2{
+
+    font-weight:700;
+
+}
+
+
+.shop-btn{
+
+    border-radius:30px;
+
+    padding:12px 35px;
+
+    font-weight:bold;
+
+}
+
+
+
+</style>
+
+
+
+<div class="container py-5">
+
+
+    <!-- Heading -->
+
+    <div class="text-center mb-5">
+
+
+        <h1 class="page-title">
+
+            🍽 My Orders
+
+        </h1>
+
+
+        <p class="subtitle">
+
+            Track your previous food orders
+
+        </p>
+
+
+    </div>
+
+
+
+
+{% if orders %}
+
+
+
+<div class="row g-4">
+
+
+{% for order in orders %}
+
+
+
+<div class="col-lg-4 col-md-6">
+
+
+<div class="order-card h-100">
+
+
+
+<!-- Header -->
+
+
+<div class="order-header d-flex justify-content-between align-items-center">
+
+
+<h5>
+
+🧾 Order #{{ order.id }}
+
+</h5>
+
+
+
+<span class="status">
+
+✓ Completed
+
+</span>
+
+
+
+</div>
+
+
+
+
+<div class="order-body">
+
+
+
+<!-- Food Items -->
+
+
+<div class="food-section">
+
+
+<h6 class="section-title">
+
+🍔 Ordered Items
+
+</h6>
+
+
+
+{% for item in order.orderitem_set.all %}
+
+
+
+<div class="food-item">
+
+
+
+<div>
+
+
+<div class="food-name">
+
+{{ item.food.name }}
+
+</div>
+
+
+<div class="food-quantity">
+
+Quantity : {{ item.quantity }}
+
+</div>
+
+
+</div>
+
+
+
+<div class="food-price">
+
+₹{{ item.price }}
+
+</div>
+
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+
+<!-- Total Amount -->
+
+
+<div class="amount-box">
+
+
+<small>
+
+Total Amount
+
+</small>
+
+
+<div class="amount">
+
+₹{{ order.total_amount }}
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- Date -->
+
+
+<div class="date-box">
+
+
+<p>
+
+📅
+
+<b>Date:</b>
+
+{{ order.created_at|date:"d M Y" }}
+
+</p>
+
+
+
+<p>
+
+🕒
+
+<b>Time:</b>
+
+{{ order.created_at|date:"h:i A" }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<a href="{% url 'order_detail' order.id %}"
+
+class="btn btn-primary view-btn">
+
+
+👁 View Order Details
+
+
+</a>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+{% else %}
+
+
+
+<!-- Empty Orders -->
+
+
+<div class="empty-box">
+
+
+<img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png">
+
+
+<h2>
+
+No Orders Yet
+
+</h2>
+
+
+<p class="text-muted">
+
+You haven't placed any food orders.
+
+</p>
+
+
+
+<a href="{% url 'food_list' %}"
+
+class="btn btn-success shop-btn">
+
+
+🍔 Start Ordering
+
+
+</a>
+
+
+</div>
+
+
+
+{% endif %}
+
+
+
+</div>
+
+
+
+{% endblock %}

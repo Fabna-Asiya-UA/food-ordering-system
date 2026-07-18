@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section>
+    <div>
+        <img
+    src="https://t4.ftcdn.net/jpg/02/92/20/37/360_F_292203735_CSsyqyS6A4Z9Czd4Msf7qZEhoxjpzZl1.jpg"
+    class="img-fluid w-100 p-3 m-0"
+    alt="Food"
+>
+    </div>
+</section>
+<h2>Food Menu</h2>
+
+
+<form method="GET" class="mb-4">
+
+    <input type="text" name="q" placeholder="Search Food" class="form-control">
+
+</form>
+
+<div class="row">
+
+{% for food in foods %}
+
+<div class="col-md-4 mb-4">
+
+    <div class="card h-100">
+
+        <img src="{{ food.image.url }}"  height="250">
+
+        <div class="card-body">
+
+            <h5>{{ food.name }}</h5>
+
+            <p>{{ food.category }}</p>
+
+            <p>{{ food.description }}</p>
+
+            <h6>₹{{ food.price }}</h6>
+
+            <a href="{% url 'add_to_cart' food.id %}" class="btn btn-success"> Add To Cart </a>
+
+            {% if user.is_staff %}
+
+            <a href="{% url 'edit_food' food.id %}"
+               class="btn btn-warning">
+                Edit
+            </a>
+
+            <a href="{% url 'delete_food' food.id %}"
+               class="btn btn-danger">
+                Delete
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

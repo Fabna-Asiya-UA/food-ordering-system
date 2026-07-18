@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center login-container">
+
+    <div class="login-card">
+
+        <h2 class="text-center mb-4">Welcome Back </h2>
+        <p class="text-center text-muted mb-4">
+            Login to continue to your account
+        </p>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-success w-100">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
